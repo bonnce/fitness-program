@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import Button from '../components/Button.astro';
 ---
 
 <Layout title="Welcome to Astro.">
@@ -55,11 +56,12 @@ import Card from '../components/Card.astro';
 				body="Explore a galaxy of community-built starter themes."
 			/>
 			<Card
-				href="https://astro.build/chat/"
-				title="Community"
-				body="Come say hi to our amazing Discord community. ❤️"
+				subtitle="Example exercise"
+				title="00:45"
+				index={1}
 			/>
 		</ul>
+		<Button text='next' />
 	</main>
 </Layout>
 
