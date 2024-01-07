@@ -1,0 +1,10 @@
+---
+import Button from './Button.astro';
+interface Props {
+	text: string;
+  className?:string;
+}
+
+const { text, className } = Astro.props;
+---
+<Button text={text} className={`py-1 rounded-none rounded-bl-xl w-full ${className}`}>

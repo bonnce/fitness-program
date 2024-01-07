@@ -9,7 +9,12 @@ export default {
 				'sixty':'#00030F',
 			},
 			dropShadow:{
-				'text':'0px 2px 2px #0005'
+				'text':'0px 2px 2px #0005',
+				'border-text':'0 0 1px #000'
+			},
+			fontFamily:{
+				'Merry':'Merriweather',
+				'Merry-Sans':'Merriweather Sans'
 			}
 		},
 	},
