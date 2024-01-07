@@ -62,8 +62,55 @@ import Button from '../components/Button.astro';
 			/>
 		</ul>
 		<Button text='next' />
-	</main>
+
+		<h1>Google Identity Services Authorization Token model</h1>
+		<button onclick="getToken();">Get access token</button><br><br>
+		<button onclick="loadCalendar();">Load Calendar</button><br><br>
+		<button onclick="revokeToken();">Revoke token</button>	</main>
 </Layout>
+
+<script is:inline>
+	var client;
+	var access_token;
+
+	function initClient() {
+		console.log('asd')
+	  client = google.accounts.oauth2.initTokenClient({
+		client_id: import.meta.env.CLIENT_ID,
+		scope: 'https://www.googleapis.com/auth/tasks.readonly',
+		callback: (tokenResponse) => {
+			console.log(tokenResponse)
+		  sessionStorage.setItem('access_token', tokenResponse.access_token)
+		},
+	  });
+	}
+	function getToken() {
+	  client.requestAccessToken();
+	}
+	function revokeToken() {
+	  google.accounts.oauth2.revoke(access_token, () => {console.log('access token revoked')});
+	}
+	function loadCalendar() {
+		const date = new Date()
+		const access_token = sessionStorage.getItem('access_token')
+	  var xhr = new XMLHttpRequest();
+	  xhr.open('GET', 'https://tasks.googleapis.com/tasks/v1/users/@me/lists');
+	  xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
+	  xhr.send()
+	  xhr.onload = function(){
+		const tasklist = JSON.parse(this.response).items[0].id
+		console.log(tasklist)
+		var xhr2 = new XMLHttpRequest();
+		xhr2.open('GET', `https://tasks.googleapis.com/tasks/v1/lists/${tasklist}/tasks?maxResults=5&dueMin=${date.toISOString()}`);
+		xhr2.setRequestHeader('Authorization', 'Bearer ' + access_token);
+		xhr2.send()
+		xhr2.onload = function(){
+			console.log(this.response)
+		}
+	  }
+	}
+	initClient()
+  </script>
 
 <style>
 	main {
