@@ -7,4 +7,4 @@ interface Props {
 
 const { text, className } = Astro.props;
 ---
-<Button text={text} className={`py-1 rounded-none rounded-bl-xl w-full ${className}`}>
+<Button text={text} className={`!py-1 !rounded-none !rounded-bl-xl w-full ${className ?? ''}`}/>

@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Button from '../components/Button.astro';
 import ButtonCard from '../components/ButtonCard.astro';
+import Circle from '../components/Circle.astro';
+import Lists from '../components/Lists.astro';
 ---
 
 <Layout title="Welcome to Astro.">
@@ -67,6 +69,8 @@ import ButtonCard from '../components/ButtonCard.astro';
 			/>
 		</ul>
 		<Button text='next' />
+		<Circle title='START' />
+		<Lists items={['messi','aguero','ronaldo','messi']}/>
 	</main>
 </Layout>
 
