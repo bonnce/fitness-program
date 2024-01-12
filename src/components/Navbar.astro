@@ -1,14 +1,36 @@
-<nav class="fixed w-full left-0 bottom-0">
-  <ul class="w-full flex text-2xl text-white border-t-2">
-    <li class="border-x-2 w-full text-center"><a class="w-full block hover:bg-gray-800 active:bg-gray-200" href="/exercise">exercise</a></li>
-    <li class="border-x-2 w-full text-center"><a class="w-full block hover:bg-gray-800 active:bg-gray-200" href="/routine">routine</a></li>
-    <li class="border-x-2 w-full text-center"><a class="w-full block hover:bg-gray-800 active:bg-gray-200" href="/">home</a></li>
-    <li class="border-x-2 w-full text-center"><a class="w-full block hover:bg-gray-800 active:bg-gray-200" href="/program">program</a></li>
-    <li class="border-x-2 w-full text-center"><a class="w-full block hover:bg-gray-800 active:bg-gray-200" href="/quickly">quickly</a></li>
-  </ul>
+---
+const locations = [
+  { name:'exercise', href:'/exercise' },
+  { name:'routine', href:'/routine' },
+  { name:'home', href:'/' },
+  { name:'program', href:'/program' },
+  { name:'quick', href:'/quick' },
+
+]
+---
+
+<nav class="fixed w-full h-12 left-0 bottom-0">
+  <ul class="w-full h-full flex text-xs text-white bg-sixty">
+    {
+      locations.map((loc)=>{
+        return  loc.name === 'home' ?
+          ( <li class="bg-sixty h-1/2 w-3/5 text-center relative"><a class="bg-inherit w-full block hover:bg-gray-800 active:bg-gray-200 absolute p-2 border-2 border-white rounded-full home" href="/">
+              <img class="w-full" src="/home.svg" alt="home">
+            </a></li>) :
+          (<li class="h-full border-t-2 w-full text-center"><a class="w-full h-full flex items-center block hover:bg-gray-800 active:bg-gray-200" href={loc.href}>
+            <p class="w-full text-center uppercase">{loc.name}</p>
+            </a></li>)
+      })
+    }
+     </ul>
 </nav>
 <style>
   a:active{
     box-shadow: inset 0px 5px 5px 0px #000;
+  }
+  .home{
+    translate: -50% -50%;
+    left:50%;
+    top:50%;
   }
 </style>
