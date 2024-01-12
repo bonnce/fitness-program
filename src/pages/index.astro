@@ -6,6 +6,7 @@ import ButtonCard from '../components/ButtonCard.astro';
 import Circle from '../components/Circle.astro';
 import Lists from '../components/Lists.astro';
 import Timer from '../components/Timer';
+import Modal from '../components/Modal.astro';
 ---
 
 <Layout title="Welcome to Astro.">
@@ -74,6 +75,8 @@ import Timer from '../components/Timer';
 			<Timer duration={10} client:visible/>
 		</Circle>
 		<Lists items={['messi','aguero','ronaldo','messi']}/>
+
+		<Modal/>
 	</main>
 </Layout>
 

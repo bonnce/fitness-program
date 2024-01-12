@@ -1,0 +1,36 @@
+---
+import Button from "./Button.astro";
+interface Props {
+    id?: string
+    title?: string
+}
+---
+
+<dialog class="w-full h-full p-0" id="dialog" onclick="event.target==this && this.close()">
+    <section class="w-full h-full bg-thirty">
+        esto es una prueba del dialog
+        <Button text="Close" id="closeModal"/>
+    </section>
+</dialog>
+
+<Button text="OPEN" id="openModal" />
+
+<style>
+    dialog::backdrop{
+        background-color: rgb(0 0 0 / .6);
+    }
+</style>
+<script >
+const open = document.getElementById('openModal')
+const close = document.getElementById('closeModal')
+const dialog = document.getElementById('dialog') as HTMLDialogElement
+const closeDialog = ()=>{
+    document.body.style.overflow = 'auto'
+    dialog?.close()
+}
+open?.addEventListener('click',()=>{
+    document.body.style.overflow = 'hidden'
+    dialog?.showModal()
+})
+close?.addEventListener('click',closeDialog)
+</script>
