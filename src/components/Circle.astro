@@ -1,18 +1,18 @@
 ---
 interface Props {
-	title: string;
+	placeholder: string;
 }
 
-const { title } = Astro.props;
+const { placeholder } = Astro.props;
 const fontsize = 1.5
 const line = 2
 const padding = 5
-const lenght = title.length
+const lenght = placeholder.length
 const size = fontsize * lenght + line + padding
 const style = {width:`${size}rem`, height:`${size}rem`}
 ---
 <div class="rounded-full border-8 border-ten flex items-center justify-center" style={style}>
     <h2 class="text-4xl w-fit text-center">
-        {title}
+        <slot/>
     </h2>
 </div>
