@@ -1,36 +1,75 @@
 ---
 import Button from "./Button.astro";
 interface Props {
-    id?: string
     title?: string
 }
+const {title} = Astro.props
 ---
 
-<dialog class="w-full h-full p-0" id="dialog" onclick="event.target==this && this.close()">
-    <section class="w-full h-full bg-thirty">
-        esto es una prueba del dialog
-        <Button text="Close" id="closeModal"/>
-    </section>
-</dialog>
+<modal-element>
+    <dialog class="w-full h-full p-0" data-dialog>
 
-<Button text="OPEN" id="openModal" />
+        <section class="w-full h-full bg-thirty text-white relative font-merry p-2">
+            <h2 class="w-full text-center text-3xl">{title}</h2>
+            <slot/>
+            <button  data-close-modal class="absolute right-0 top-0 w-min h-min mr-2">X</button>
+        </section>
+    </dialog>
+    <Button text="OPEN" id="open-modal" />
+</modal-element>
+
 
 <style>
     dialog::backdrop{
-        background-color: rgb(0 0 0 / .6);
+        background-color: rgb(0 0 0 / .3);
+        backdrop-filter: blur(5px);
+    }
+    dialog{
+        display: block;
+        position: fixed;
+        inset-block-start: 0px;
+        inset-block-end: 0px;
+        max-width: calc((100% - 6px) - 2em);
+        max-height: calc((100% - 6px) - 2em);
+        user-select: none;
+        pointer-events: none;
+        transition: all .2s ease-in;
+        scale: .9;
+        opacity: 0;
+        box-shadow: 3px 3px 7px 3px #222a;
+        border: none;
+    }
+    dialog[open]{
+        pointer-events: all;
+        scale: 1;
+        opacity: 1;
     }
 </style>
 <script >
-const open = document.getElementById('openModal')
-const close = document.getElementById('closeModal')
-const dialog = document.getElementById('dialog') as HTMLDialogElement
-const closeDialog = ()=>{
-    document.body.style.overflow = 'auto'
-    dialog?.close()
-}
-open?.addEventListener('click',()=>{
-    document.body.style.overflow = 'hidden'
-    dialog?.showModal()
-})
-close?.addEventListener('click',closeDialog)
+    class ModalElement extends HTMLElement {
+        constructor() {
+            super();
+            
+            const open = this.querySelector('[data-open-modal]')
+            const close = this.querySelector('[data-close-modal]')
+            const dialog = this.querySelector('[data-dialog]') as HTMLDialogElement
+
+            const closeDialog = ()=>{
+                document.body.style.overflow = 'auto'
+                dialog?.close()
+            }
+            open?.addEventListener('click',()=>{
+                document.body.style.overflow = 'hidden'
+                dialog?.showModal()
+            })
+            close?.addEventListener('click',closeDialog)
+            dialog?.addEventListener('click',function(ev){
+                if(this === ev.target){
+                    closeDialog()
+                }
+            })
+        }
+  }
+
+  customElements.define('modal-element', ModalElement);
 </script>

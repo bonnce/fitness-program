@@ -74,9 +74,9 @@ import Modal from '../components/Modal.astro';
 		<Circle placeholder='00:00' >
 			<Timer duration={10} client:visible/>
 		</Circle>
-		<Lists items={['messi','aguero','ronaldo','messi']}/>
-
-		<Modal/>
+		<Modal title='Routine'>
+			<Lists items={['messi','aguero','ronaldo','messi']}/>
+		</Modal>
 	</main>
 </Layout>
 
