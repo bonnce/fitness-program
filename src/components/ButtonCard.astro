@@ -1,10 +1,12 @@
 ---
-import Button from './Button.astro';
+import Button from './GenericButton.astro';
 interface Props {
 	text: string;
   className?:string;
+  id?:string
 }
 
-const { text, className } = Astro.props;
+const { text, className, id } = Astro.props;
+const classes = ['py-1 rounded-bl-xl w-full', className ?? '']
 ---
-<Button text={text} className={`!py-1 !rounded-none !rounded-bl-xl w-full ${className ?? ''}`}/>
+<Button text={text} {id} className={classes}/>

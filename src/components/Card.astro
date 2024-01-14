@@ -9,7 +9,7 @@ const { title, subtitle, index } = Astro.props;
 const bgColor = {backgroundColor:`hsl(229,33%,${index ? (index * 8 + 38) : 58}%)`}
 ---
 
-<li class={`rounded-tr-xl text-center p-4 w-full`} style={bgColor}>
+<li class={`rounded-tr-xl text-center p-4 w-full list-none`} style={bgColor}>
 	<h5 class="text-xs font-light font-Merry">
 		{subtitle}
 	</h5>

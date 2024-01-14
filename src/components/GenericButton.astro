@@ -1,0 +1,22 @@
+---
+interface Props {
+	text: string;
+  className?: string[];
+  id?: string
+}
+
+const { text, className, id } = Astro.props;
+const dataID = {[`data-${id}`]:""}
+const classes = ['text-center bg-ten uppercase hover:bg-yellow-300 active:bg-yellow-700',className]
+---
+<button {...dataID} class:list={classes}>
+  <p class="drop-shadow-text text-white font-normal">
+    {text}
+  </p>
+</button>
+
+<style>
+  button{
+    transition: background-color .1s ease-out;
+  }
+</style>

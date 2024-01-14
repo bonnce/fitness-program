@@ -1,0 +1,25 @@
+---
+import Button from "../components/Button.astro";
+import ButtonCard from "../components/ButtonCard.astro";
+import Card from "../components/Card.astro";
+import Lists from "../components/Lists.astro";
+import Modal from "../components/Modal.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Create a routine">
+    <main class="pb-16 p-4 flex flex-col items-center min-h-screen justify-around">
+        <h1 class="text-5xl text-center mt-8 mb-24 uppercase">create routine</h1>
+        <h2>Name</h2>
+        <div class="w-full flex flex-col gap-2">
+            <Card title="00:45" subtitle="Exercise Time" />
+            <Card title="00:45" subtitle="Rest Time" />
+            <Card title="5" subtitle="Exercises" />
+            <Modal>
+                <Lists items={['Uno','Dos','Tres']} />
+                <ButtonCard text="Save" />
+            </Modal>
+        </div>
+        <Button text="Create" />
+    </main>
+</Layout>

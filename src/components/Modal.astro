@@ -1,5 +1,5 @@
 ---
-import Button from "./Button.astro";
+import ButtonCard from "./ButtonCard.astro";
 interface Props {
     title?: string
 }
@@ -15,7 +15,7 @@ const {title} = Astro.props
             <button  data-close-modal class="absolute right-0 top-0 w-min h-min mr-2">X</button>
         </section>
     </dialog>
-    <Button text="OPEN" id="open-modal" />
+    <ButtonCard text="OPEN" id="open-modal" />
 </modal-element>
 
 

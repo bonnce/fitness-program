@@ -11,8 +11,6 @@ const lenght = placeholder.length
 const size = fontsize * lenght + line + padding
 const style = {width:`${size}rem`, height:`${size}rem`}
 ---
-<div class="rounded-full border-8 border-ten flex items-center justify-center" style={style}>
-    <h2 class="text-4xl w-fit text-center">
-        <slot/>
-    </h2>
+<div class="rounded-full border-8 border-ten flex items-center justify-center text-4xl text-ten" style={style}>
+    <slot/>
 </div>
