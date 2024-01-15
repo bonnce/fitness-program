@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Circle from '../components/Circle.astro';
+import Timer from '../components/Timer';
+import Button from '../components/Button.astro';
+---
+
+<Layout title="Welcome to Astro.">
+	<main class="pb-16 p-4 flex flex-col items-center justify-around min-h-dvh">
+		<h1 class="text-5xl text-center mt-8 mb-24">EXERCISE NAME</h1>
+		<Circle placeholder='00:00' >
+			<Timer duration={50} client:visible />
+        </Circle>
+        <p>Last weight</p>
+        <p>Last time</p>
+        <Button text='Next' />
+	</main>
+</Layout>
+
+<style>
+
+</style>

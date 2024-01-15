@@ -6,14 +6,14 @@ interface Props {
 }
 
 const { title, subtitle, index } = Astro.props;
-const bgColor = {backgroundColor:`hsl(229,33%,${index ? (index * 8 + 38) : 58}%)`}
+const bgColor = {backgroundColor:`hsl(229,33%,${index ? (index * 8 + 18) : 58}%)`}
 ---
 
 <li class={`rounded-tr-xl text-center p-4 w-full list-none`} style={bgColor}>
 	<h5 class="text-xs font-light font-Merry">
 		{subtitle}
 	</h5>
-		<h2 class="text-3xl drop-shadow-border-text">
+		<h2 class="text-3xl drop-shadow-border-text uppercase">
 			{title}
 		</h2>
 </li>

@@ -1,14 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Circle from '../components/Circle.astro';
-import Timer from '../components/Timer';
 ---
 
 <Layout title="Welcome to Astro.">
 	<main class="pb-16 p-4 flex flex-col items-center">
 		<h1 class="text-5xl text-center mt-8 mb-24">TODAY WORKOUT</h1>
 		<Circle placeholder='START' >
-			START
+			<a href="/start">START</a>
 		</Circle>
 	</main>
 </Layout>
