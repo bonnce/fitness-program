@@ -1,3 +1,5 @@
+import type { FormValues } from "../types"
+
 export const WEEK = {
     'Mon':1,
     'Tue':2,
@@ -30,4 +32,27 @@ export const addDays = (date:Date, days: number)=>{
 export const isToday = (date:Date)=>{
     const today = new Date()
     return date.toDateString() === today.toDateString()
+}
+
+export function formHandler<T>(form: HTMLFormElement, formAction:Function){
+    const formData: FormValues = {};
+    const elements = form.elements;
+
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i] as HTMLInputElement;
+        const { name, value, type } = element;
+        //could make some validations here
+        if (name) {
+            formData[name] = type === "number" ? Number(value): value;
+        }
+    }
+
+    formAction(formData as T)
+
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i] as HTMLInputElement;
+        element.value = ""
+    }
+
+    alert('Success!')
 }

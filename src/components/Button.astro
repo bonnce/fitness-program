@@ -4,9 +4,10 @@ interface Props {
 	text: string;
   className?:string;
   id?:string
+  type?: "submit" | "reset" | "button"
 }
 
-const { text, className, id } = Astro.props;
+const { text, className, id, type } = Astro.props;
 const classes = ['px-10 py-4 rounded-xl', className ?? '']
 ---
-<GenericButton text={text} {id} className={classes}/>
+<GenericButton type={type} text={text} {id} className={classes}/>

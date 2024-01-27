@@ -1,25 +1,22 @@
-import type { Exercise } from "../types";
+import type { IDBPObjectStore } from "idb";
+import type { FitDB, fitStore, fitStoreKeys } from "../types";
 import { IDB } from "./ixdb";
 
-export async function dbActionsWrapper(operation:Function){
-    const db = new IDB('database')
+export async function dbBeforeActions(operation:(db:IDB)=>Promise<void>){
+    const db = new IDB()
     await db.init()
-
-    operation(db)
-
+    await operation(db)
     db.close()
 }
 
-export async function addExercise(db:IDB, ex:Exercise){
-    const tx = await db.createTransaction('exercise','readwrite')
-    const objStore = tx?.objectStore('exercise')
-    await objStore?.put?.(ex)
+export async function dbActions(db:IDB, store:fitStoreKeys, opType:"readonly"|"readwrite", 
+    operation: (objStore:IDBPObjectStore<FitDB, [fitStoreKeys], fitStoreKeys, "readonly" | "readwrite"> | undefined)=>Promise<number | undefined>) {
+    const tx = await db.createTransaction(store, opType)
+    const objStore = tx?.objectStore(store)
+    await operation(objStore)
     tx?.commit()
 }
 
-export function test(e:SubmitEvent){
-    const form = e.target as HTMLFormElement
-    const name =  form.elements.namedItem('name') as HTMLInputElement
-    const ex:Exercise = { name: name.value}
-    dbActionsWrapper((db:IDB)=> addExercise(db, ex))
+export async function putToDB(data:fitStore, store:fitStoreKeys){
+    await dbBeforeActions((db)=>dbActions(db, store, 'readwrite',async (objStore)=> objStore?.put?.(data)))
 }

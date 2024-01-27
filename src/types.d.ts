@@ -28,8 +28,9 @@ export interface Calendar {
     programs: string[]
 }
 
-export type fitStore = "exercise" | "routine" | "calendar" | "program"
-export type operationType = "add" | "get" | "getAll" | "getKey" | "getAllKeys"| "count"| "put"| "add"| "index" | "delete"| "clear" 
+export interface FormValues {
+    [key: string]: string | number | undefined;
+  }
 
 export interface FitDB extends DBSchema {
     exercise: {
@@ -52,3 +53,9 @@ export interface FitDB extends DBSchema {
         indexes: { 'calendar_idx': string[], 'multiEntry' };
     };
 }
+
+export type fitStoreKeys = "exercise" | "routine" | "calendar" | "program"
+export type operationType = "add" | "get" | "getAll" | "getKey" | "getAllKeys"| "count"| "put"| "add"| "index" | "delete"| "clear" 
+export type fitStore = Exercise | Routine | Program | Calendar
+export type IDBWriteOperation = 'add' | 'put' | 'delete';
+export type IDBReadOperation = 'get' | 'getAll' | 'getAllKeys' | 'count' | 'getKey';

@@ -1,20 +1,19 @@
 import { openDB, type IDBPDatabase } from "idb";
-import type { FitDB, fitStore } from "../types";
+import type { FitDB, fitStoreKeys } from "../types";
 
 
 export class IDB{
     static version = 2;
-    name:string
+    static name = 'database';
     db: null | IDBPDatabase<FitDB>
 
-    constructor(name:string) {
-        this.name = name;
+    constructor() {
         this.db = null;
     }
 
     async init() {
         try {
-            this.db = await openDB<FitDB>(this.name, IDB.version,{
+            this.db = await openDB<FitDB>(IDB.name, IDB.version,{
               upgrade(db, oldVersion){  
                   if (oldVersion < IDB.version) {
                         // make a backup before new updates
@@ -55,7 +54,7 @@ export class IDB{
         }
     }
 
-    async createTransaction(store:fitStore ,opType:"readwrite"|"readonly") {
+    async createTransaction(store:fitStoreKeys ,opType:"readwrite"|"readonly") {
         if (!this.db) {
             console.error('La base de datos no está inicializada.');
             return;
