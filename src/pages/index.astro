@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Circle from '../components/Circle.astro';
+
 ---
 
 <Layout title="Welcome to Astro.">
@@ -9,9 +10,20 @@ import Circle from '../components/Circle.astro';
 		<Circle placeholder='START' >
 			<a href="/start">START</a>
 		</Circle>
+		<form>
+			<input type="text" name="name" class="text-black text-2xl">
+			<input type="submit" class="border-2 border-white p-4 ">
+		</form>
 	</main>
 </Layout>
 
-<style>
+<script>
+	import { test } from "../utils/db_interactions";
+	const form = document.querySelector('form')
+	if(form)
+	form.onsubmit = function submit(e:SubmitEvent){
+		e.preventDefault()
+		test(e)
+	}
+</script>
 
-</style>
